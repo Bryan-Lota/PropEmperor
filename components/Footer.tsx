@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { SOCIAL_LINKS, COMPANY_NAME, SERVICES } from '../constants';
@@ -65,11 +66,11 @@ export const Footer: React.FC = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Phone size={20} className="text-gold-500 shrink-0" />
-                <span>+234 800 PROP EMPEROR</span>
+                <span>+2348133389856</span>
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={20} className="text-gold-500 shrink-0" />
-                <span>info@propemperor.com</span>
+                <span>propemperorrealestate@gmail.com</span>
               </div>
             </div>
           </div>

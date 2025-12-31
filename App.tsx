@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
@@ -404,7 +405,7 @@ const AdminLogin = () => {
     if (success) {
       navigate('/admin/dashboard');
     } else {
-      alert('Invalid Credentials. Try admin@propemperor.com / admin123');
+      alert('Invalid Credentials. Try propemperorrealestate@gmail.com / admin123');
     }
   };
 
@@ -425,7 +426,7 @@ const AdminLogin = () => {
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full p-4 bg-black border border-zinc-700 text-white focus:border-gold-500 outline-none"
-              placeholder="admin@propemperor.com"
+              placeholder="propemperorrealestate@gmail.com"
             />
           </div>
           <div>

@@ -1,9 +1,10 @@
+
 import { Property, Service, Testimonial } from './types';
 
 export const COMPANY_NAME = "PropEmperor Real Estate";
 export const FOUNDER_NAME = "Chiemerie";
 export const FOUNDER_BIO = "Chiemerie is a visionary real estate entrepreneur dedicated to transforming the property landscape in Enugu with integrity and innovation.";
-export const COMPANY_PHONE = "2348000000000"; // Replace with actual number
+export const COMPANY_PHONE = "2348133389856"; 
 export const COMPANY_LOCATION = "Independence Layout, Enugu, Nigeria";
 
 export const SOCIAL_LINKS = {

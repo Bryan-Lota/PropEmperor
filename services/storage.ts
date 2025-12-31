@@ -1,3 +1,4 @@
+
 import { INITIAL_PROPERTIES } from '../constants';
 import { Property as PropertyType } from '../types';
 
@@ -73,7 +74,7 @@ export const authService = {
   login: async (email: string, password: string): Promise<boolean> => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     // Hardcoded admin for demo
-    if (email === 'admin@propemperor.com' && password === 'admin123') {
+    if (email === 'propemperorrealestate@gmail.com' && password === 'admin123') {
       localStorage.setItem(AUTH_KEY, 'true');
       return true;
     }
