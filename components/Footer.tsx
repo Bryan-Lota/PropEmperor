@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, ArrowRight, Lock } from 'lucide-react';
 import { SOCIAL_LINKS, COMPANY_NAME, SERVICES } from '../constants';
 import { Link } from 'react-router-dom';
 
@@ -41,7 +41,9 @@ export const Footer: React.FC = () => {
               <li><Link to="/about" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2"><ArrowRight size={12} className="text-gold-500"/> About Us</Link></li>
               <li><Link to="/listings" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2"><ArrowRight size={12} className="text-gold-500"/> Our Portfolio</Link></li>
               <li><Link to="/services" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2"><ArrowRight size={12} className="text-gold-500"/> Services</Link></li>
+              <li><Link to="/policy" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2"><ArrowRight size={12} className="text-gold-500"/> Policy</Link></li>
               <li><Link to="/contact" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2"><ArrowRight size={12} className="text-gold-500"/> Contact</Link></li>
+              <li><Link to="/admin" className="hover:text-gold-400 hover:translate-x-1 transition-all flex items-center gap-2 pt-4 opacity-50 hover:opacity-100 font-bold"><Lock size={12} className="text-gold-500"/> Admin Login</Link></li>
             </ul>
           </div>
 
@@ -78,7 +80,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center text-zinc-500 text-xs">
           <p>&copy; {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.</p>
-          <p className="mt-2 md:mt-0 font-serif">Designed by Elite Engineering.</p>
+          <p className="mt-2 md:mt-0 font-serif">Designed by Bryan.</p>
         </div>
       </div>
     </footer>

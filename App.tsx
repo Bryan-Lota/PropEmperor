@@ -4,14 +4,15 @@ import { HashRouter as Router, Routes, Route, useLocation, useNavigate, useParam
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { AIChat } from './components/AIChat';
-import { SERVICES, FOUNDER_BIO, FOUNDER_NAME, COMPANY_PHONE } from './constants';
+import { SERVICES, FOUNDER_BIO, FOUNDER_NAME, COMPANY_PHONE, COMPANY_NAME } from './constants';
 import { Property as PropertyType } from './types';
 import { propertyService, authService } from './services/storage';
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { 
   ArrowRight, CheckCircle, Star, MapPin, Bed, Bath, Square, 
   ShieldCheck, Briefcase, Award, TrendingUp, X, Filter, Search, 
-  Play, MessageCircle, Plus, Trash2, Edit2, LogOut, Upload, User, LayoutDashboard, List
+  Play, MessageCircle, Plus, Trash2, Edit2, LogOut, Upload, User, LayoutDashboard, List,
+  Shield, Scale, FileCheck, Landmark, PlusCircle, Save
 } from 'lucide-react';
 import * as Icons from 'lucide-react';
 
@@ -166,18 +167,14 @@ const FeaturedPropertiesMarquee = () => {
         <div className="h-0.5 w-20 bg-gold-500 mx-auto opacity-50"></div>
       </div>
       
-      {/* Infinite Marquee Container */}
       <div className="relative w-full">
         <div className="flex w-max animate-marquee hover:pause gap-8 px-4">
-          {/* Duplicate data to create seamless loop */}
           {[...properties, ...properties, ...properties].map((p, idx) => (
             <div key={`${p.id}-${idx}`} className="w-[350px] md:w-[400px]">
               <PropertyCard property={p} />
             </div>
           ))}
         </div>
-        
-        {/* Gradients to fade edges */}
         <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
         <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
       </div>
@@ -192,6 +189,196 @@ const FeaturedPropertiesMarquee = () => {
 };
 
 // --- Pages ---
+
+const AboutUsPage = () => {
+  return (
+    <div className="bg-black text-white min-h-screen">
+      {/* Hero */}
+      <div className="h-[60vh] relative flex items-center justify-center overflow-hidden">
+         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Corporate Architecture" />
+         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
+         <motion.div 
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           className="relative z-10 text-center px-4"
+         >
+           <h1 className="font-serif text-5xl md:text-7xl font-bold mb-6 italic">About Us</h1>
+           <p className="text-gold-500 uppercase tracking-[0.5em] text-sm font-bold">The Legacy of Excellence</p>
+           <div className="h-1 w-32 bg-gold-500 mx-auto mt-6"></div>
+         </motion.div>
+      </div>
+
+      {/* Founder Section */}
+      <section className="py-24 px-4 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+         <motion.div 
+           initial={{ opacity: 0, x: -50 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           className="relative"
+         >
+            <div className="absolute -inset-4 border border-gold-500/30 -z-10 translate-x-8 translate-y-8"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+              alt={FOUNDER_NAME} 
+              className="w-full h-[700px] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl border border-zinc-800"
+            />
+            <div className="absolute bottom-8 left-8 bg-black/90 backdrop-blur-md border border-gold-500/50 text-white p-8">
+               <h3 className="font-serif text-3xl font-bold text-gold-500">{FOUNDER_NAME}</h3>
+               <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mt-2">Founder, Visionary & CEO</p>
+            </div>
+         </motion.div>
+         
+         <motion.div 
+           initial={{ opacity: 0, x: 50 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           className="space-y-8"
+         >
+            <div>
+              <span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Our Philosophy</span>
+              <h2 className="font-serif text-4xl font-bold mb-6">A Vision Of Unrivaled Luxury</h2>
+              <p className="text-white text-lg leading-relaxed font-medium italic border-l-4 border-gold-500 pl-6 mb-8">
+                {FOUNDER_BIO}
+              </p>
+            </div>
+
+            <div className="prose prose-invert prose-gold max-w-none text-gray-400 leading-relaxed space-y-6">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </p>
+              <p>
+                At PropEmperor, we redefine the very essence of dwelling. Established with a clear objective to provide the "Gold Standard" in the Nigerian real estate industry, {COMPANY_NAME} has grown from a local brokerage into a multi-faceted real estate powerhouse. We believe that every land transaction should be as regal and secure as the name implies.
+              </p>
+              <p>
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+              </p>
+              <p>
+                Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat.
+              </p>
+              <p>
+                Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-zinc-800">
+               <div>
+                  <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">150+</h4>
+                  <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Properties Sold</p>
+               </div>
+               <div>
+                  <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">500+</h4>
+                  <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Happy Clients</p>
+               </div>
+            </div>
+         </motion.div>
+      </section>
+
+      {/* Corporate Philosophy */}
+      <section className="py-24 bg-zinc-950 border-y border-zinc-900">
+         <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="font-serif text-3xl font-bold mb-8 italic text-gold-500">The Emperor's Creed</h2>
+            <div className="prose prose-invert prose-gold max-w-none text-gray-400 leading-loose italic">
+              "Fusce convallis, mauris imperdiet gravida bibendum, nisl turpis suscipit mauris, sed placerat ipsum augue porta orci. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor."
+            </div>
+         </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="py-24">
+         <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+               <h2 className="font-serif text-3xl font-bold mb-4 uppercase tracking-widest">Our Core Values</h2>
+               <div className="h-0.5 w-20 bg-gold-500 mx-auto"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+               {[
+                 { title: 'Integrity', icon: Shield, desc: 'Every document we handle is verified and legal, ensuring your absolute peace of mind. We stand by our word.' },
+                 { title: 'Excellence', icon: Award, desc: 'We don\'t just find houses; we find legacies. Quality is non-negotiable in every brick and document.' },
+                 { title: 'Innovation', icon: TrendingUp, desc: 'Utilizing modern technology and AI to streamline the Nigerian property market for global accessibility.' }
+               ].map((val, i) => (
+                 <div key={i} className="text-center p-12 border border-zinc-900 bg-zinc-900/30 hover:border-gold-500/50 transition-all group relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gold-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <val.icon className="mx-auto mb-6 text-gold-500 group-hover:scale-110 transition-transform" size={48} strokeWidth={1}/>
+                    <h3 className="font-serif text-xl font-bold mb-4">{val.title}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{val.desc}</p>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+    </div>
+  );
+};
+
+const PolicyPage = () => {
+  const policies = [
+    {
+      title: "Privacy & Data Protection",
+      icon: Shield,
+      content: "At PropEmperor, your personal data is handled with imperial security. We collect your information solely for property matching and legal documentation. We never share your data with third parties without your explicit consent."
+    },
+    {
+      title: "Transaction Security",
+      icon: Landmark,
+      content: "All financial transactions are conducted through secure, regulated banking channels. We advise all clients to verify payment instructions via our official office lines or in-person at our Independence Layout headquarters."
+    },
+    {
+      title: "Property Viewing Policy",
+      icon: Search,
+      content: "Site inspections are arranged 24-48 hours in advance. For security reasons, all prospective clients must provide basic identification before viewing premium or occupied luxury assets."
+    },
+    {
+      title: "Verification & Documentation",
+      icon: FileCheck,
+      content: "PropEmperor guarantees that all listings passed through our agency undergo a rigorous 3-step verification process, including title search and surveyor validation, to prevent land disputes."
+    },
+    {
+      title: "Service Fees & Commissions",
+      icon: Scale,
+      content: "Our agency fees follow standard Nigerian Real Estate Association guidelines. All professional fees are disclosed upfront during initial consulting sessions to maintain absolute transparency."
+    }
+  ];
+
+  return (
+    <div className="pt-40 pb-24 bg-black min-h-screen px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">Policy</h1>
+          <p className="text-gold-500 uppercase text-xs font-bold tracking-[0.4em]">Standards of Excellence</p>
+        </div>
+
+        <div className="space-y-8">
+          {policies.map((p, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-sm hover:border-gold-500/30 transition-all"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="bg-gold-500/10 p-3 rounded-sm">
+                  <p.icon className="text-gold-500" size={24} />
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-white">{p.title}</h3>
+              </div>
+              <p className="text-gray-400 leading-relaxed">
+                {p.content}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-16 bg-gold-500/5 border border-gold-500/20 p-8 text-center rounded-sm">
+           <p className="text-gray-300 text-sm mb-4 italic">
+             "PropEmperor Real Estate operates under the legal framework of the Corporate Affairs Commission (CAC) and Nigerian Real Estate Regulatory Laws."
+           </p>
+           <p className="text-gold-500 font-bold text-xs uppercase tracking-widest">Effective Date: January 1, 2024</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ListingsPage = () => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
@@ -222,7 +409,6 @@ const ListingsPage = () => {
           <div className="h-1 w-20 bg-gold-500 mx-auto"></div>
         </div>
 
-        {/* Filters */}
         <div className="mb-12 flex flex-col md:flex-row gap-6 justify-between items-center bg-zinc-900 p-6 rounded-sm border border-zinc-800">
           <div className="flex gap-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
              {['All', 'Sale', 'Rent', 'Short-Let'].map(type => (
@@ -279,7 +465,6 @@ const PropertyDetailsPage = () => {
 
   return (
     <div className="pt-24 bg-black min-h-screen pb-20">
-       {/* Image Gallery */}
        <div className="h-[50vh] md:h-[70vh] relative group">
           <img 
             src={property.images[activeImage]} 
@@ -300,7 +485,6 @@ const PropertyDetailsPage = () => {
        </div>
 
        <div className="max-w-7xl mx-auto px-4 mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Main Content */}
           <div className="lg:col-span-2 text-white">
              <div className="flex justify-between items-start mb-6">
                 <div>
@@ -345,7 +529,6 @@ const PropertyDetailsPage = () => {
              </div>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
              <div className="bg-zinc-900 p-8 border border-zinc-800 sticky top-32">
                 <h3 className="font-serif text-xl font-bold text-white mb-6">Interested?</h3>
@@ -397,66 +580,88 @@ const ServicesPage = () => {
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     const success = await authService.login(email, password);
     if (success) {
       navigate('/admin/dashboard');
     } else {
-      alert('Invalid Credentials. Try propemperorrealestate@gmail.com / admin123');
+      setError('Invalid Access Credentials. Please verify your details.');
     }
   };
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center px-4 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-900/20 via-black to-black"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-900/10 via-black to-black"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
       
-      <div className="relative z-10 w-full max-w-md bg-zinc-900 border border-zinc-800 p-10 shadow-2xl shadow-black">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="relative z-10 w-full max-w-md bg-zinc-900/80 backdrop-blur-xl border border-gold-500/20 p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+      >
         <div className="text-center mb-10">
-           <h2 className="font-serif text-3xl font-bold text-white">Admin Portal</h2>
-           <p className="text-gold-500 text-xs font-bold uppercase tracking-[0.3em] mt-2">Restricted Access</p>
+           <div className="inline-block p-4 bg-gold-500/10 rounded-full mb-4">
+              <ShieldCheck className="text-gold-500" size={40} />
+           </div>
+           <h2 className="font-serif text-3xl font-bold text-white tracking-tight">Admin Portal</h2>
+           <p className="text-gold-500 text-[10px] font-bold uppercase tracking-[0.4em] mt-3">PropEmperor Management</p>
         </div>
+
+        {error && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6 p-4 bg-red-900/20 border border-red-900/50 text-red-500 text-xs text-center font-bold uppercase tracking-widest">
+            {error}
+          </motion.div>
+        )}
+
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Email</label>
+            <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-2">Authenticated Email</label>
             <input 
               type="email" 
+              required
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="w-full p-4 bg-black border border-zinc-700 text-white focus:border-gold-500 outline-none"
-              placeholder="propemperorrealestate@gmail.com"
+              className="w-full p-4 bg-black/50 border border-zinc-800 text-white focus:border-gold-500 outline-none transition-colors"
+              placeholder="admin@propemperor.com"
             />
           </div>
           <div>
-            <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Password</label>
+            <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-2">Access Key</label>
             <input 
               type="password" 
+              required
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="w-full p-4 bg-black border border-zinc-700 text-white focus:border-gold-500 outline-none"
+              className="w-full p-4 bg-black/50 border border-zinc-800 text-white focus:border-gold-500 outline-none transition-colors"
               placeholder="••••••••"
             />
           </div>
-          <button className="w-full bg-gold-500 text-black font-bold py-4 uppercase tracking-widest hover:bg-white transition-all shadow-lg">
-            Authenticate
+          <button className="w-full bg-gold-500 text-black font-bold py-5 uppercase text-xs tracking-[0.3em] hover:bg-white transition-all shadow-gold-glow">
+            Establish Session
           </button>
         </form>
-      </div>
+        <p className="mt-8 text-center text-[10px] text-zinc-600 font-bold uppercase tracking-widest">Secure 256-bit Encrypted Portal</p>
+      </motion.div>
     </div>
   );
 };
 
 const AdminDashboard = () => {
   const [properties, setProperties] = useState<PropertyType[]>([]);
-  const [view, setView] = useState<'list' | 'add'>('list');
+  const [view, setView] = useState<'list' | 'editor'>('list');
+  const [editingId, setEditingId] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // Form State
-  const [formData, setFormData] = useState({
-    title: '', price: '', location: '', type: 'Sale', bedrooms: '', bathrooms: '', sqft: '', description: '', imageUrl: ''
-  });
+  // Unified Form State
+  const initialForm = {
+    title: '', price: '', location: '', type: 'Sale', bedrooms: '0', bathrooms: '0', sqft: '0', description: '', imageUrl: '', status: 'Available'
+  };
+  const [formData, setFormData] = useState(initialForm);
 
   useEffect(() => {
     if (!authService.isAuthenticated()) {
@@ -471,8 +676,25 @@ const AdminDashboard = () => {
     setProperties(data);
   };
 
+  const handleEdit = (p: PropertyType) => {
+    setEditingId(p.id);
+    setFormData({
+      title: p.title,
+      price: p.price.toString(),
+      location: p.location,
+      type: p.type,
+      bedrooms: p.bedrooms.toString(),
+      bathrooms: p.bathrooms.toString(),
+      sqft: p.sqft.toString(),
+      description: p.description,
+      imageUrl: p.images[0] || '',
+      status: p.status
+    });
+    setView('editor');
+  };
+
   const handleDelete = async (id: string) => {
-    if(window.confirm('Delete this listing?')) {
+    if(window.confirm('IRREVERSIBLE ACTION: Are you sure you want to permanently delete this asset listing?')) {
       await propertyService.delete(id);
       loadData();
     }
@@ -480,88 +702,267 @@ const AdminDashboard = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await propertyService.create({
+    const payload = {
       title: formData.title,
       price: parseInt(formData.price),
-      priceDisplay: `₦${parseInt(formData.price).toLocaleString()}`,
+      priceDisplay: `₦${parseInt(formData.price).toLocaleString()}${formData.type === 'Rent' ? ' / yr' : ''}`,
       location: formData.location,
       type: formData.type as any,
       bedrooms: parseInt(formData.bedrooms),
       bathrooms: parseInt(formData.bathrooms),
       sqft: parseInt(formData.sqft),
       description: formData.description,
-      images: [formData.imageUrl || 'https://via.placeholder.com/800'],
-      features: ['Standard Feature'],
-      status: 'Available',
+      images: [formData.imageUrl || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'],
+      features: ['Standard Luxury Feature', 'Security Verified'],
+      status: formData.status as any,
       isFeatured: false
-    });
-    alert('Property Added');
+    };
+
+    if (editingId) {
+      await propertyService.update(editingId, payload);
+      alert('Asset Listing Updated Successfully.');
+    } else {
+      await propertyService.create(payload);
+      alert('New Asset Listing Created Successfully.');
+    }
+
     setView('list');
+    setEditingId(null);
+    setFormData(initialForm);
     loadData();
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-24 pb-20 px-4">
+    <div className="min-h-screen bg-black text-white pt-28 pb-20 px-4">
        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-10 border-b border-zinc-800 pb-6">
-             <h1 className="font-serif text-3xl font-bold">Dashboard</h1>
-             <div className="flex gap-4">
-                <button onClick={() => setView('list')} className={`px-4 py-2 text-xs font-bold uppercase ${view === 'list' ? 'bg-gold-500 text-black' : 'bg-zinc-800'}`}>Manage</button>
-                <button onClick={() => setView('add')} className={`px-4 py-2 text-xs font-bold uppercase ${view === 'add' ? 'bg-gold-500 text-black' : 'bg-zinc-800'}`}>Add New</button>
-                <button onClick={() => { authService.logout(); navigate('/'); }} className="px-4 py-2 bg-red-900/50 text-red-500 text-xs font-bold uppercase border border-red-900">Logout</button>
+          {/* Header Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+             <div className="bg-zinc-900 p-6 border-l-4 border-gold-500">
+                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-2">Total Assets</p>
+                <h2 className="text-3xl font-serif font-bold">{properties.length}</h2>
+             </div>
+             <div className="bg-zinc-900 p-6 border-l-4 border-white/20">
+                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-2">Active Sales</p>
+                <h2 className="text-3xl font-serif font-bold">{properties.filter(p => p.type === 'Sale').length}</h2>
+             </div>
+             <div className="bg-zinc-900 p-6 border-l-4 border-white/20">
+                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-2">Rentals</p>
+                <h2 className="text-3xl font-serif font-bold">{properties.filter(p => p.type === 'Rent').length}</h2>
+             </div>
+             <div className="bg-zinc-900 p-6 border-l-4 border-white/20">
+                <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-2">Short Lets</p>
+                <h2 className="text-3xl font-serif font-bold">{properties.filter(p => p.type === 'Short-Let').length}</h2>
              </div>
           </div>
 
-          {view === 'list' ? (
-             <div className="bg-zinc-900 border border-zinc-800 rounded-sm overflow-hidden">
-                <table className="w-full text-left">
-                   <thead className="bg-zinc-950 text-gray-500 text-xs uppercase">
-                      <tr>
-                         <th className="p-4">Property</th>
-                         <th className="p-4">Price</th>
-                         <th className="p-4">Status</th>
-                         <th className="p-4">Actions</th>
-                      </tr>
-                   </thead>
-                   <tbody>
-                      {properties.map(p => (
-                         <tr key={p.id} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                            <td className="p-4 font-bold">{p.title}</td>
-                            <td className="p-4 text-gold-500">{p.priceDisplay}</td>
-                            <td className="p-4"><span className="bg-green-900 text-green-400 text-xs px-2 py-1">{p.status}</span></td>
-                            <td className="p-4">
-                               <button onClick={() => handleDelete(p.id)} className="text-red-500 hover:text-red-400"><Trash2 size={18}/></button>
-                            </td>
-                         </tr>
-                      ))}
-                   </tbody>
-                </table>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+             <div>
+                <h1 className="font-serif text-4xl font-bold tracking-tight">PropEmperor <span className="text-gold-500">Inventory</span></h1>
+                <p className="text-zinc-500 text-xs mt-2 font-bold uppercase tracking-widest">Master Control Dashboard</p>
              </div>
-          ) : (
-             <div className="bg-zinc-900 p-8 border border-zinc-800 max-w-3xl mx-auto">
-                <h2 className="font-serif text-2xl mb-6">Add New Asset</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                   <div className="grid grid-cols-2 gap-6">
-                      <input placeholder="Title" required className="bg-black border border-zinc-700 p-4 text-white" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
-                      <input placeholder="Location" required className="bg-black border border-zinc-700 p-4 text-white" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} />
-                   </div>
-                   <div className="grid grid-cols-3 gap-6">
-                      <input type="number" placeholder="Price (Numeric)" required className="bg-black border border-zinc-700 p-4 text-white" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} />
-                      <select className="bg-black border border-zinc-700 p-4 text-white" value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})}>
-                         <option>Sale</option><option>Rent</option><option>Short-Let</option>
-                      </select>
-                      <input placeholder="Image URL" required className="bg-black border border-zinc-700 p-4 text-white" value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} />
-                   </div>
-                   <div className="grid grid-cols-3 gap-6">
-                      <input type="number" placeholder="Beds" className="bg-black border border-zinc-700 p-4 text-white" value={formData.bedrooms} onChange={e => setFormData({...formData, bedrooms: e.target.value})} />
-                      <input type="number" placeholder="Baths" className="bg-black border border-zinc-700 p-4 text-white" value={formData.bathrooms} onChange={e => setFormData({...formData, bathrooms: e.target.value})} />
-                      <input type="number" placeholder="Sqft" className="bg-black border border-zinc-700 p-4 text-white" value={formData.sqft} onChange={e => setFormData({...formData, sqft: e.target.value})} />
-                   </div>
-                   <textarea placeholder="Description" className="w-full bg-black border border-zinc-700 p-4 text-white h-32" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})}></textarea>
-                   <button className="w-full bg-gold-500 text-black py-4 font-bold uppercase tracking-widest hover:bg-white transition-colors">Create Listing</button>
-                </form>
+             <div className="flex gap-4">
+                <button 
+                  onClick={() => { setView('list'); setEditingId(null); setFormData(initialForm); }} 
+                  className={`flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all ${view === 'list' ? 'bg-gold-500 text-black' : 'bg-zinc-800 text-zinc-400 hover:text-white'}`}
+                >
+                   <List size={16}/> Management
+                </button>
+                <button 
+                  onClick={() => { setView('editor'); setEditingId(null); setFormData(initialForm); }} 
+                  className={`flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-all ${view === 'editor' && !editingId ? 'bg-gold-500 text-black' : 'bg-zinc-800 text-zinc-400 hover:text-white'}`}
+                >
+                   <PlusCircle size={16}/> Add New Listing
+                </button>
+                <button 
+                  onClick={() => { authService.logout(); navigate('/'); }} 
+                  className="flex items-center gap-2 px-6 py-3 bg-red-900/10 text-red-500 border border-red-900/30 text-xs font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all"
+                >
+                   <LogOut size={16}/> Terminate Session
+                </button>
              </div>
-          )}
+          </div>
+
+          <AnimatePresence mode="wait">
+            {view === 'list' ? (
+               <motion.div 
+                 key="list"
+                 initial={{ opacity: 0, y: 10 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -10 }}
+                 className="bg-zinc-900/50 border border-zinc-800 rounded-sm overflow-hidden"
+               >
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                       <thead className="bg-black text-zinc-500 text-[10px] uppercase font-bold tracking-widest">
+                          <tr>
+                             <th className="p-6">Asset Title</th>
+                             <th className="p-6">Price Point</th>
+                             <th className="p-6">Category</th>
+                             <th className="p-6">Current Status</th>
+                             <th className="p-6 text-right">Administrative Actions</th>
+                          </tr>
+                       </thead>
+                       <tbody className="divide-y divide-zinc-800">
+                          {properties.map(p => (
+                             <tr key={p.id} className="hover:bg-gold-500/[0.02] transition-colors group">
+                                <td className="p-6">
+                                   <div className="flex items-center gap-4">
+                                      <img src={p.images[0]} className="w-12 h-12 object-cover rounded-sm border border-zinc-800" />
+                                      <div>
+                                         <p className="font-bold text-white group-hover:text-gold-500 transition-colors">{p.title}</p>
+                                         <p className="text-[10px] text-zinc-500 uppercase">{p.location}</p>
+                                      </div>
+                                   </div>
+                                </td>
+                                <td className="p-6 font-serif text-gold-500 font-bold">{p.priceDisplay}</td>
+                                <td className="p-6">
+                                   <span className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-zinc-800 text-zinc-400 border border-zinc-700">
+                                      {p.type}
+                                   </span>
+                                </td>
+                                <td className="p-6">
+                                   <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 ${
+                                      p.status === 'Available' ? 'bg-green-900/20 text-green-400 border border-green-900/50' :
+                                      p.status === 'Sold' ? 'bg-red-900/20 text-red-400 border border-red-900/50' : 
+                                      'bg-orange-900/20 text-orange-400 border border-orange-900/50'
+                                   }`}>
+                                      {p.status}
+                                   </span>
+                                </td>
+                                <td className="p-6 text-right">
+                                   <div className="flex justify-end gap-3">
+                                      <button 
+                                        onClick={() => handleEdit(p)}
+                                        className="p-2 text-zinc-400 hover:text-gold-500 hover:bg-gold-500/10 rounded-sm transition-all"
+                                        title="Edit Listing"
+                                      >
+                                         <Edit2 size={18}/>
+                                      </button>
+                                      <button 
+                                        onClick={() => handleDelete(p.id)}
+                                        className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-500/10 rounded-sm transition-all"
+                                        title="Permanently Delete"
+                                      >
+                                         <Trash2 size={18}/>
+                                      </button>
+                                   </div>
+                                </td>
+                             </tr>
+                          ))}
+                       </tbody>
+                    </table>
+                  </div>
+                  {properties.length === 0 && (
+                     <div className="py-32 text-center">
+                        <p className="text-zinc-600 uppercase text-xs font-bold tracking-widest">No assets found in the Emperor's Database.</p>
+                     </div>
+                  )}
+               </motion.div>
+            ) : (
+               <motion.div 
+                 key="editor"
+                 initial={{ opacity: 0, scale: 0.98 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 exit={{ opacity: 0, scale: 0.98 }}
+                 className="bg-zinc-900/50 p-8 md:p-12 border border-zinc-800 max-w-5xl mx-auto"
+               >
+                  <div className="flex items-center gap-4 mb-10 border-b border-zinc-800 pb-8">
+                     <div className="p-3 bg-gold-500/10 text-gold-500 rounded-sm">
+                        {editingId ? <Edit2 size={24}/> : <PlusCircle size={24}/>}
+                     </div>
+                     <div>
+                        <h2 className="font-serif text-3xl font-bold">{editingId ? 'Edit Asset Listing' : 'Declare New Asset'}</h2>
+                        <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.3em] mt-1">{editingId ? `Listing ID: ${editingId}` : 'Create official entry'}</p>
+                     </div>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-10">
+                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-6">
+                           <div>
+                              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Asset Title</label>
+                              <input placeholder="e.g. Royal Emperor Estate" required className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} />
+                           </div>
+                           <div>
+                              <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Geographical Location</label>
+                              <input placeholder="e.g. Independence Layout, Enugu" required className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none" value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} />
+                           </div>
+                        </div>
+                        <div className="space-y-6">
+                           <div className="grid grid-cols-2 gap-6">
+                              <div>
+                                 <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Market Valuation (Numeric)</label>
+                                 <input type="number" placeholder="150000000" required className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} />
+                              </div>
+                              <div>
+                                 <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Listing Category</label>
+                                 <select className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none appearance-none cursor-pointer" value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})}>
+                                    <option>Sale</option>
+                                    <option>Rent</option>
+                                    <option>Short-Let</option>
+                                    <option>Lease</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div className="grid grid-cols-2 gap-6">
+                              <div>
+                                 <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Inventory Status</label>
+                                 <select className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none appearance-none cursor-pointer" value={formData.status} onChange={e => setFormData({...formData, status: e.target.value})}>
+                                    <option>Available</option>
+                                    <option>Sold</option>
+                                    <option>Pending</option>
+                                 </select>
+                              </div>
+                              <div>
+                                 <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Primary Visual (URL)</label>
+                                 <input placeholder="https://..." required className="w-full bg-black border border-zinc-800 p-4 text-white focus:border-gold-500 outline-none" value={formData.imageUrl} onChange={e => setFormData({...formData, imageUrl: e.target.value})} />
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div className="grid grid-cols-3 gap-8 pt-6 border-t border-zinc-800">
+                        <div>
+                           <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3 text-center">Sleep Chambers (Beds)</label>
+                           <input type="number" className="w-full bg-black border border-zinc-800 p-4 text-white text-center focus:border-gold-500 outline-none" value={formData.bedrooms} onChange={e => setFormData({...formData, bedrooms: e.target.value})} />
+                        </div>
+                        <div>
+                           <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3 text-center">Luxury Baths</label>
+                           <input type="number" className="w-full bg-black border border-zinc-800 p-4 text-white text-center focus:border-gold-500 outline-none" value={formData.bathrooms} onChange={e => setFormData({...formData, bathrooms: e.target.value})} />
+                        </div>
+                        <div>
+                           <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3 text-center">Total Footprint (Sqft)</label>
+                           <input type="number" className="w-full bg-black border border-zinc-800 p-4 text-white text-center focus:border-gold-500 outline-none" value={formData.sqft} onChange={e => setFormData({...formData, sqft: e.target.value})} />
+                        </div>
+                     </div>
+
+                     <div className="pt-6 border-t border-zinc-800">
+                        <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Detailed Asset Description & Narrative</label>
+                        <textarea 
+                           placeholder="Describe the royal essence and features of this property..." 
+                           required 
+                           className="w-full bg-black border border-zinc-800 p-6 text-white h-56 focus:border-gold-500 outline-none leading-relaxed resize-none" 
+                           value={formData.description} 
+                           onChange={e => setFormData({...formData, description: e.target.value})}
+                        ></textarea>
+                     </div>
+
+                     <div className="flex gap-6">
+                        <button type="submit" className="flex-1 bg-gold-500 text-black py-5 font-bold uppercase text-xs tracking-[0.4em] hover:bg-white transition-all shadow-gold-glow flex items-center justify-center gap-2">
+                           {editingId ? <><Save size={18}/> Commit Updates</> : <><Plus size={18}/> Publish Listing</>}
+                        </button>
+                        <button 
+                           type="button" 
+                           onClick={() => { setView('list'); setEditingId(null); setFormData(initialForm); }}
+                           className="px-10 py-5 bg-zinc-800 text-zinc-400 font-bold uppercase text-xs tracking-[0.4em] hover:bg-zinc-700 hover:text-white transition-all"
+                        >
+                           Cancel
+                        </button>
+                     </div>
+                  </form>
+               </motion.div>
+            )}
+          </AnimatePresence>
        </div>
     </div>
   );
@@ -592,6 +993,8 @@ const App: React.FC = () => {
                  </div>
                </>
             } />
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/policy" element={<PolicyPage />} />
             <Route path="/listings" element={<ListingsPage />} />
             <Route path="/property/:id" element={<PropertyDetailsPage />} />
             <Route path="/services" element={<ServicesPage />} />

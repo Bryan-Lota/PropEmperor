@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Building2 } from 'lucide-react';
+import { Menu, X, Building2, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar: React.FC = () => {
@@ -20,6 +21,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
     { name: 'Listings', path: '/listings' },
     { name: 'Services', path: '/services' },
     { name: 'Contact', path: '/contact' },
@@ -38,7 +40,6 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative w-12 h-12 flex items-center justify-center">
-                {/* Single Building Icon without background square */}
                 <Building2 className="text-gold-500 h-10 w-10 relative z-10 transition-transform duration-500 group-hover:scale-110" strokeWidth={1.5} />
             </div>
             <div className="flex flex-col">
@@ -50,12 +51,12 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden md:flex items-center space-x-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-sm font-bold tracking-widest uppercase hover:text-gold-400 transition-all relative group py-2 ${
+                className={`text-xs font-bold tracking-widest uppercase hover:text-gold-400 transition-all relative group py-2 ${
                   location.pathname === link.path ? 'text-gold-500' : 'text-gray-300'
                 }`}
               >
@@ -63,6 +64,14 @@ export const Navbar: React.FC = () => {
                 <span className={`absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-transparent via-gold-500 to-transparent transition-all duration-500 group-hover:w-full ${location.pathname === link.path ? 'w-full' : ''}`}></span>
               </Link>
             ))}
+            
+            {/* Admin Access Button */}
+            <Link 
+              to="/admin" 
+              className="flex items-center gap-2 bg-gold-500/10 hover:bg-gold-500 text-gold-500 hover:text-black border border-gold-500/30 px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-all rounded-sm"
+            >
+              <User size={14} /> Admin
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -100,6 +109,12 @@ export const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+              <Link
+                to="/admin"
+                className="block text-lg font-serif font-bold tracking-widest uppercase border-l-2 pl-4 border-gold-500/50 text-gold-500"
+              >
+                Admin Login
+              </Link>
             </div>
           </motion.div>
         )}
