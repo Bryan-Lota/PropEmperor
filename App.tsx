@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { AIChat } from './components/AIChat';
 import { SERVICES, FOUNDER_BIO, FOUNDER_NAME, COMPANY_PHONE, COMPANY_NAME } from './constants';
 import { Property as PropertyType } from './types';
 import { propertyService, authService } from './services/storage';
@@ -1010,7 +1009,6 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
-        <AIChat />
       </div>
     </Router>
   );
