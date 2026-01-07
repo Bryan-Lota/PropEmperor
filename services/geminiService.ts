@@ -1,17 +1,9 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { INITIAL_PROPERTIES, SERVICES, COMPANY_NAME, FOUNDER_NAME, FOUNDER_BIO } from '../constants';
 
-const API_KEY = process.env.API_KEY || ''; // In a real app, ensure this is set securely.
-
-// Initializing the model lazily to avoid issues if API key is missing during build
-let aiClient: GoogleGenAI | null = null;
-
-const getAiClient = () => {
-  if (!aiClient && API_KEY) {
-    aiClient = new GoogleGenAI({ apiKey: API_KEY });
-  }
-  return aiClient;
-};
+// Always use the specified initialization pattern with the apiKey from environment variables.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SYSTEM_INSTRUCTION = `
 You are the "Emperor's Assistant", a helpful and sophisticated AI concierge for ${COMPANY_NAME}.
@@ -33,20 +25,17 @@ Keep responses concise (under 100 words) unless detailed info is requested.
 `;
 
 export const generateAIResponse = async (userMessage: string): Promise<string> => {
-  const client = getAiClient();
-  if (!client) {
-    return "I am currently offline (API Key missing). Please contact support directly.";
-  }
-
   try {
-    const response = await client.models.generateContent({
-      model: 'gemini-2.5-flash',
+    // Use the recommended 'gemini-3-flash-preview' model for basic text tasks.
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
       contents: userMessage,
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
       }
     });
     
+    // The response.text property directly returns the generated text.
     return response.text || "I apologize, I couldn't process that request right now.";
   } catch (error) {
     console.error("Gemini API Error:", error);

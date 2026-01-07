@@ -1,3 +1,4 @@
+
 export interface Property {
   id: string;
   title: string;
@@ -32,16 +33,16 @@ export interface Testimonial {
   avatar: string;
 }
 
-export interface ChatMessage {
-  id: string;
-  role: 'user' | 'model';
-  text: string;
-  timestamp: Date;
-}
-
 export interface AdminUser {
   id: string;
   email: string;
   name: string;
   role: 'admin';
+}
+
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'model';
+  text: string;
+  timestamp: Date;
 }

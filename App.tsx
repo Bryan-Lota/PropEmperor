@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { AIChat } from './components/AIChat';
 import { SERVICES, FOUNDER_BIO, FOUNDER_NAME, COMPANY_PHONE, COMPANY_NAME } from './constants';
 import { Property as PropertyType } from './types';
 import { propertyService, authService } from './services/storage';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
 import { 
-  ArrowRight, CheckCircle, MapPin, Bed, Bath, Square, 
-  ShieldCheck, Award, TrendingUp, Search, 
-  MessageCircle, Plus, Trash2, Edit2, LogOut, List,
+  ArrowRight, CheckCircle, Star, MapPin, Bed, Bath, Square, 
+  ShieldCheck, Briefcase, Award, TrendingUp, X, Filter, Search, 
+  Play, MessageCircle, Plus, Trash2, Edit2, LogOut, Upload, User, LayoutDashboard, List,
   Shield, Scale, FileCheck, Landmark, PlusCircle, Save
 } from 'lucide-react';
 import * as Icons from 'lucide-react';
@@ -42,6 +44,7 @@ const WhatsAppButton = ({ propertyTitle }: { propertyTitle: string }) => {
 const HeroSection = () => {
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden bg-black">
+      {/* Dynamic Background */}
       <div className="absolute inset-0 z-0">
          <motion.div 
            initial={{ scale: 1.1 }}
@@ -121,16 +124,16 @@ const PropertyCard: React.FC<{ property: PropertyType }> = ({ property }) => {
         
         <div className="grid grid-cols-3 gap-2 border-t border-zinc-800 pt-4 mb-6">
            <div className="text-center">
-             <span className="block text-white font-bold">{property.bedrooms}</span>
-             <span className="text-[10px] text-gray-500 uppercase">Beds</span>
+              <span className="block text-white font-bold">{property.bedrooms}</span>
+              <span className="text-[10px] text-gray-500 uppercase">Beds</span>
            </div>
            <div className="text-center border-l border-zinc-800">
-             <span className="block text-white font-bold">{property.bathrooms}</span>
-             <span className="text-[10px] text-gray-500 uppercase">Baths</span>
+              <span className="block text-white font-bold">{property.bathrooms}</span>
+              <span className="text-[10px] text-gray-500 uppercase">Baths</span>
            </div>
            <div className="text-center border-l border-zinc-800">
-             <span className="block text-white font-bold">{property.sqft}</span>
-             <span className="text-[10px] text-gray-500 uppercase">Sqft</span>
+              <span className="block text-white font-bold">{property.sqft}</span>
+              <span className="text-[10px] text-gray-500 uppercase">Sqft</span>
            </div>
         </div>
         
@@ -178,7 +181,7 @@ const FeaturedPropertiesMarquee = () => {
 
       <div className="text-center mt-12">
          <a href="/#/listings" className="inline-flex items-center gap-2 text-gold-500 uppercase text-xs font-bold tracking-widest hover:text-white transition-colors">
-           View All Properties <ArrowRight size={16}/>
+            View All Properties <ArrowRight size={16}/>
          </a>
       </div>
     </div>
@@ -190,6 +193,7 @@ const FeaturedPropertiesMarquee = () => {
 const AboutUsPage = () => {
   return (
     <div className="bg-black text-white min-h-screen">
+      {/* Hero */}
       <div className="h-[60vh] relative flex items-center justify-center overflow-hidden">
          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Corporate Architecture" />
          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
@@ -204,6 +208,7 @@ const AboutUsPage = () => {
          </motion.div>
       </div>
 
+      {/* Founder Section */}
       <section className="py-24 px-4 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
          <motion.div 
            initial={{ opacity: 0, x: -50 }}
@@ -211,16 +216,16 @@ const AboutUsPage = () => {
            viewport={{ once: true }}
            className="relative"
          >
-           <div className="absolute -inset-4 border border-gold-500/30 -z-10 translate-x-8 translate-y-8"></div>
-           <img 
-             src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-             alt={FOUNDER_NAME} 
-             className="w-full h-[700px] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl border border-zinc-800"
-           />
-           <div className="absolute bottom-8 left-8 bg-black/90 backdrop-blur-md border border-gold-500/50 text-white p-8">
-              <h3 className="font-serif text-3xl font-bold text-gold-500">{FOUNDER_NAME}</h3>
-              <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mt-2">Founder, Visionary & CEO</p>
-           </div>
+            <div className="absolute -inset-4 border border-gold-500/30 -z-10 translate-x-8 translate-y-8"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+              alt={FOUNDER_NAME} 
+              className="w-full h-[700px] object-cover grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl border border-zinc-800"
+            />
+            <div className="absolute bottom-8 left-8 bg-black/90 backdrop-blur-md border border-gold-500/50 text-white p-8">
+               <h3 className="font-serif text-3xl font-bold text-gold-500">{FOUNDER_NAME}</h3>
+               <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mt-2">Founder, Visionary & CEO</p>
+            </div>
          </motion.div>
          
          <motion.div 
@@ -229,45 +234,56 @@ const AboutUsPage = () => {
            viewport={{ once: true }}
            className="space-y-8"
          >
-           <div>
-             <span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Our Philosophy</span>
-             <h2 className="font-serif text-4xl font-bold mb-6">A Vision Of Unrivaled Luxury</h2>
-             <p className="text-white text-lg leading-relaxed font-medium italic border-l-4 border-gold-500 pl-6 mb-8">
-               {FOUNDER_BIO}
-             </p>
-           </div>
+            <div>
+              <span className="text-gold-500 font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Our Philosophy</span>
+              <h2 className="font-serif text-4xl font-bold mb-6">A Vision Of Unrivaled Luxury</h2>
+              <p className="text-white text-lg leading-relaxed font-medium italic border-l-4 border-gold-500 pl-6 mb-8">
+                {FOUNDER_BIO}
+              </p>
+            </div>
 
-           <div className="prose prose-invert prose-gold max-w-none text-gray-400 leading-relaxed space-y-6">
-             <p>
-               At PropEmperor, we redefine the very essence of dwelling. Established with a clear objective to provide the "Gold Standard" in the Nigerian real estate industry, {COMPANY_NAME} has grown from a local brokerage into a multi-faceted real estate powerhouse. We believe that every land transaction should be as regal and secure as the name implies.
-             </p>
-             <p>
-               We are committed to delivering excellence in every aspect of our service. From property valuation to legal documentation, our team ensures that every step of your real estate journey is seamless and transparent.
-             </p>
-           </div>
-           
-           <div className="grid grid-cols-2 gap-8 pt-8 border-t border-zinc-800">
-              <div>
-                 <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">150+</h4>
-                 <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Properties Sold</p>
-              </div>
-              <div>
-                 <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">500+</h4>
-                 <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Happy Clients</p>
-              </div>
-           </div>
+            <div className="prose prose-invert prose-gold max-w-none text-gray-400 leading-relaxed space-y-6">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </p>
+              <p>
+                At PropEmperor, we redefine the very essence of dwelling. Established with a clear objective to provide the "Gold Standard" in the Nigerian real estate industry, {COMPANY_NAME} has grown from a local brokerage into a multi-faceted real estate powerhouse. We believe that every land transaction should be as regal and secure as the name implies.
+              </p>
+              <p>
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+              </p>
+              <p>
+                Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat.
+              </p>
+              <p>
+                Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-zinc-800">
+               <div>
+                  <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">150+</h4>
+                  <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Properties Sold</p>
+               </div>
+               <div>
+                  <h4 className="text-gold-500 font-serif text-4xl font-bold mb-2">500+</h4>
+                  <p className="text-xs uppercase text-gray-500 font-bold tracking-widest">Happy Clients</p>
+               </div>
+            </div>
          </motion.div>
       </section>
 
+      {/* Corporate Philosophy */}
       <section className="py-24 bg-zinc-950 border-y border-zinc-900">
          <div className="max-w-4xl mx-auto px-4 text-center">
             <h2 className="font-serif text-3xl font-bold mb-8 italic text-gold-500">The Emperor's Creed</h2>
             <div className="prose prose-invert prose-gold max-w-none text-gray-400 leading-loose italic">
-              "We pledge to uphold the highest standards of integrity, transparency, and excellence in every transaction. Our clients' trust is our most valuable asset, and we guard it with the same vigilance as we do their investments."
+              "Fusce convallis, mauris imperdiet gravida bibendum, nisl turpis suscipit mauris, sed placerat ipsum augue porta orci. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor."
             </div>
          </div>
       </section>
 
+      {/* Core Values */}
       <section className="py-24">
          <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
@@ -450,79 +466,79 @@ const PropertyDetailsPage = () => {
   return (
     <div className="pt-24 bg-black min-h-screen pb-20">
        <div className="h-[50vh] md:h-[70vh] relative group">
-         <img 
-           src={property.images[activeImage]} 
-           alt={property.title} 
-           className="w-full h-full object-cover"
-         />
-         <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent flex gap-2 overflow-x-auto justify-center">
-            {property.images.map((img, idx) => (
-              <button 
-               key={idx} 
-               onClick={() => setActiveImage(idx)}
-               className={`w-20 h-20 border-2 ${activeImage === idx ? 'border-gold-500' : 'border-transparent'} opacity-80 hover:opacity-100 transition-all`}
-              >
-                <img src={img} className="w-full h-full object-cover" />
-              </button>
-            ))}
-         </div>
+          <img 
+            src={property.images[activeImage]} 
+            alt={property.title} 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent flex gap-2 overflow-x-auto justify-center">
+             {property.images.map((img, idx) => (
+               <button 
+                key={idx} 
+                onClick={() => setActiveImage(idx)}
+                className={`w-20 h-20 border-2 ${activeImage === idx ? 'border-gold-500' : 'border-transparent'} opacity-80 hover:opacity-100 transition-all`}
+               >
+                 <img src={img} className="w-full h-full object-cover" />
+               </button>
+             ))}
+          </div>
        </div>
 
        <div className="max-w-7xl mx-auto px-4 mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
-         <div className="lg:col-span-2 text-white">
-            <div className="flex justify-between items-start mb-6">
-               <div>
-                  <h1 className="font-serif text-3xl md:text-4xl font-bold mb-2">{property.title}</h1>
-                  <p className="text-gold-500 flex items-center gap-2"><MapPin size={18}/> {property.location}</p>
-               </div>
-               <div className="text-right">
-                  <p className="text-2xl font-bold text-white">{property.priceDisplay}</p>
-                  <span className="bg-zinc-800 text-gray-300 text-xs px-2 py-1 uppercase">{property.status}</span>
-               </div>
-            </div>
+          <div className="lg:col-span-2 text-white">
+             <div className="flex justify-between items-start mb-6">
+                <div>
+                   <h1 className="font-serif text-3xl md:text-4xl font-bold mb-2">{property.title}</h1>
+                   <p className="text-gold-500 flex items-center gap-2"><MapPin size={18}/> {property.location}</p>
+                </div>
+                <div className="text-right">
+                   <p className="text-2xl font-bold text-white">{property.priceDisplay}</p>
+                   <span className="bg-zinc-800 text-gray-300 text-xs px-2 py-1 uppercase">{property.status}</span>
+                </div>
+             </div>
 
-            <div className="flex gap-8 border-y border-zinc-800 py-6 mb-8">
-               <div className="flex items-center gap-3">
-                  <Bed className="text-gold-500"/>
-                  <div><span className="block font-bold">{property.bedrooms}</span><span className="text-xs text-gray-500">Bedrooms</span></div>
-               </div>
-               <div className="flex items-center gap-3">
-                  <Bath className="text-gold-500"/>
-                  <div><span className="block font-bold">{property.bathrooms}</span><span className="text-xs text-gray-500">Bathrooms</span></div>
-               </div>
-               <div className="flex items-center gap-3">
-                  <Square className="text-gold-500"/>
-                  <div><span className="block font-bold">{property.sqft}</span><span className="text-xs text-gray-500">Square Ft</span></div>
-               </div>
-            </div>
+             <div className="flex gap-8 border-y border-zinc-800 py-6 mb-8">
+                <div className="flex items-center gap-3">
+                   <Bed className="text-gold-500"/>
+                   <div><span className="block font-bold">{property.bedrooms}</span><span className="text-xs text-gray-500">Bedrooms</span></div>
+                </div>
+                <div className="flex items-center gap-3">
+                   <Bath className="text-gold-500"/>
+                   <div><span className="block font-bold">{property.sqft}</span><span className="text-xs text-gray-500">Bathrooms</span></div>
+                </div>
+                <div className="flex items-center gap-3">
+                   <Square className="text-gold-500"/>
+                   <div><span className="block font-bold">{property.sqft}</span><span className="text-xs text-gray-500">Square Ft</span></div>
+                </div>
+             </div>
 
-            <div className="mb-8">
-              <h3 className="font-serif text-xl font-bold mb-4">Description</h3>
-              <p className="text-gray-400 leading-relaxed whitespace-pre-line">{property.description}</p>
-            </div>
+             <div className="mb-8">
+               <h3 className="font-serif text-xl font-bold mb-4">Description</h3>
+               <p className="text-gray-400 leading-relaxed whitespace-pre-line">{property.description}</p>
+             </div>
 
-            <div className="mb-8">
-              <h3 className="font-serif text-xl font-bold mb-4">Features</h3>
-              <div className="grid grid-cols-2 gap-4">
-                 {property.features.map((f, i) => (
-                   <div key={i} className="flex items-center gap-2 text-gray-300">
-                     <CheckCircle size={16} className="text-gold-500" /> {f}
-                   </div>
-                 ))}
-              </div>
-            </div>
-         </div>
-
-         <div className="space-y-6">
-            <div className="bg-zinc-900 p-8 border border-zinc-800 sticky top-32">
-               <h3 className="font-serif text-xl font-bold text-white mb-6">Interested?</h3>
-               <WhatsAppButton propertyTitle={property.title} />
-               <div className="mt-6 text-center text-gray-500 text-xs">
-                  <p>Reference ID: {property.id}</p>
-                  <p>Secure inquiry via WhatsApp Official</p>
+             <div className="mb-8">
+               <h3 className="font-serif text-xl font-bold mb-4">Features</h3>
+               <div className="grid grid-cols-2 gap-4">
+                  {property.features.map((f, i) => (
+                    <div key={i} className="flex items-center gap-2 text-gray-300">
+                      <CheckCircle size={16} className="text-gold-500" /> {f}
+                    </div>
+                  ))}
                </div>
-            </div>
-         </div>
+             </div>
+          </div>
+
+          <div className="space-y-6">
+             <div className="bg-zinc-900 p-8 border border-zinc-800 sticky top-32">
+                <h3 className="font-serif text-xl font-bold text-white mb-6">Interested?</h3>
+                <WhatsAppButton propertyTitle={property.title} />
+                <div className="mt-6 text-center text-gray-500 text-xs">
+                   <p>Reference ID: {property.id}</p>
+                   <p>Secure inquiry via WhatsApp Official</p>
+                </div>
+             </div>
+          </div>
        </div>
     </div>
   );
@@ -993,6 +1009,7 @@ const App: React.FC = () => {
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
         </main>
+        <AIChat />
         <Footer />
       </div>
     </Router>

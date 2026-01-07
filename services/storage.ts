@@ -1,3 +1,4 @@
+
 import { INITIAL_PROPERTIES } from '../constants';
 import { Property as PropertyType } from '../types';
 
