@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PropEmperor | Premium Real Estate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Cinzel"', 'serif'],
+              sans: ['"Manrope"', 'sans-serif'],
+            },
+            colors: {
+              gold: {
+                100: '#FBF5D5',
+                200: '#F6E6AA',
+                300: '#F1D67F',
+                400: '#ECC755',
+                500: '#D4AF37', // Base Gold
+                600: '#AA8C2C',
+                700: '#806921',
+                800: '#554616',
+                900: '#2B230B',
+              },
+              black: {
+                800: '#1A1A1A',
+                900: '#0A0A0A', 
+                950: '#000000', // True Black
+              }
+            },
+            animation: {
+              'shine': 'shine 8s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'marquee': 'marquee 40s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-gold': 'pulse-gold 2s infinite',
+            },
+            keyframes: {
+              shine: {
+                '0%, 20%': { backgroundPosition: '-200% center' },
+                '80%, 100%': { backgroundPosition: '200% center' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              },
+              'pulse-gold': {
+                '0%, 100%': { boxShadow: '0 0 0 0px rgba(212, 175, 55, 0.2)' },
+                '50%': { boxShadow: '0 0 0 20px rgba(212, 175, 55, 0)' },
+              }
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+              'gold-gradient': 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #D4AF37; 
+      }
+
+      .text-shadow-gold {
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      }
+      
+      .glass-panel {
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(212, 175, 55, 0.1);
+      }
+      
+      .gold-glow {
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+      }
+      
+      .gold-text-gradient {
+        background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C, #BF953F);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-size: 200% auto;
+        animation: shine 8s linear infinite;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.5.5"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="antialiased selection:bg-gold-500 selection:text-black">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
